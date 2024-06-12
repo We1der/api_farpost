@@ -1,3 +1,16 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from .models import User
+from .serializers import AuthorSerializer
+
+
+class AuthorList(generics.ListAPIView):
+    """ Generic класс только для отображения коллекции авторов"""
+    queryset = User.objects.all()
+    serializer_class = AuthorSerializer
+
+
+class AuthorDetail(generics.RetrieveAPIView):
+    """ Generic класс разрешает только чтение информации о конкретном авторе"""
+    queryset = User.objects.all()
+    serializer_class = AuthorSerializer
