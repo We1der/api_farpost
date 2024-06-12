@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from .models import Announcement
+from .serializers import AnnouncementsSerializer
+
+
+class AnnouncementList(generics.ListCreateAPIView):
+    queryset = Announcement.objects.all()
+    serializer_class = AnnouncementsSerializer
+
+
+class AnnouncementDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Announcement.objects.all()
+    serializer_class = AnnouncementsSerializer
